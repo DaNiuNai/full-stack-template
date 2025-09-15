@@ -5,6 +5,7 @@ import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import App from './App.vue'
 import router from './router'
 
+import '@/styles/tailwind.css'
 import '@/styles/base.scss'
 
 const app = createApp(App)
