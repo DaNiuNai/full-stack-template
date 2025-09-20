@@ -76,4 +76,7 @@ def get_current_user(
     db: DatabaseSessionDepends, user_id: str = Depends(get_current_user_id)
 ) -> User:
     """FastAPI 依赖函数，用于获取当前认证用户"""
-    return db.get(User,user_id)
+    user = db.get(User,user_id)
+    if not user:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="用户不存在")
+    return 
