@@ -21,7 +21,7 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
 def get_password_hash(password: str) -> str:
     """对明文密码进行哈希处理"""
     return pbkdf2_sha256.hash(password)
-print(pbkdf2_sha256.hash("123"))
+
 
 def create_jwt_token(
     data: str, expire_minutes: int | float = settings.JWT_TOKEN_EXPIRE_MINUTES
@@ -69,7 +69,7 @@ def get_current_user(
     db: DatabaseSessionDepends, user_id: str = Depends(get_current_user_id)
 ) -> User:
     """FastAPI 依赖函数，用于获取当前认证用户"""
-    user = db.get(User,user_id)
+    user = db.get(User, user_id)
     if not user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="用户不存在")
     return user
