@@ -1,4 +1,4 @@
-from passlib.context import CryptContext
+from passlib.hash import pbkdf2_sha256
 from datetime import timedelta, datetime, timezone
 from jose import jwt
 from fastapi import HTTPException, Depends, status
@@ -8,27 +8,20 @@ from src.core.database import DatabaseSessionDepends
 from src.models.mapping import User
 from src.core.config import settings
 
-# 修复库bug
-import bcrypt
 
-bcrypt.__about__ = bcrypt
-
-
-# 创建一个密码上下文，指定使用 bcrypt 算法
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 # 创建 OAuth2 密码授权方案
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     """比较明文密码和哈希密码是否匹配"""
-    return pwd_context.verify(plain_password, hashed_password)
+    return pbkdf2_sha256.verify(plain_password, hashed_password)
 
 
 def get_password_hash(password: str) -> str:
     """对明文密码进行哈希处理"""
-    return pwd_context.hash(password)
-
+    return pbkdf2_sha256.hash(password)
+print(pbkdf2_sha256.hash("123"))
 
 def create_jwt_token(
     data: str, expire_minutes: int | float = settings.JWT_TOKEN_EXPIRE_MINUTES
