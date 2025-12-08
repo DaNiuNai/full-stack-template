@@ -10,7 +10,7 @@ from src.core.config import settings
 
 
 # 创建 OAuth2 密码授权方案
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="user/login")
 
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
