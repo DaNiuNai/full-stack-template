@@ -28,11 +28,13 @@ def user_register(
             detail="用户注册已禁用",
         )
 
-    for i in user_create.model_dump():
-        if not i:
+    # 检查必填字段是否为空
+    user_data = user_create.model_dump()
+    for field, value in user_data.items():
+        if not value:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
-                detail="注册信息为空",
+                detail=f"{field}不能为空",
             )
 
     # 检查用户名是否已存在
