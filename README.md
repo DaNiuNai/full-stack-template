@@ -35,7 +35,7 @@ FastAPI后端：
 ## 快速启动
 
 ```bash
-git clone <仓库地址>
+git clone https://github.com/DaNiuNai/full-stack-template
 ```
 
 ### FastAPI后端
