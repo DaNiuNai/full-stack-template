@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
 import { ref } from 'vue'
 import { userLoginService } from '@/api/userBase'
 import router from '@/router'
@@ -11,8 +11,8 @@ const userStore = useUserStore()
 
 const login = async () => {
   const res = await userLoginService({ username: username.value, password: password.value })
-  alert("登录成功")
-  userStore.setAccessToken(res.access_token)
+  userStore.setAccessToken(res.data.access_token)
+  alert('登录成功')
   router.push('/')
 }
 </script>

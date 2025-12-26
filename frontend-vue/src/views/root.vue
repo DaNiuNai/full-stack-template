@@ -3,7 +3,7 @@ import { userInfoService } from '@/api/userBase'
 
 const getUserInfo = async () => {
   const res = await userInfoService()
-  console.log(res)
+  console.log(res.data)
 }
 </script>
 <template>
