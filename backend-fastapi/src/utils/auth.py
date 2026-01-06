@@ -59,10 +59,10 @@ def get_token_from_header(token: str = Depends(oauth2_scheme)) -> str:
     return token
 
 
-def get_current_user_id(token: str = Depends(get_token_from_header)) -> int:
+def get_current_user_id(token: str = Depends(get_token_from_header)) -> str:
     """FastAPI 依赖函数，用于获取当前JWT中的用户id"""
     data = verify_jwt_token(token)
-    return int(data)
+    return data
 
 
 def get_current_user(

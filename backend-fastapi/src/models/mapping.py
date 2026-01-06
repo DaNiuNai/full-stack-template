@@ -4,7 +4,7 @@ from typing import Optional
 
 
 class User(SQLModel, table=True):
-    id: Optional[int] = Field(default=None, primary_key=True)
+    id: str = Field(primary_key=True, index=True, unique=True)  # 用户ID
     username: str = Field(unique=True, max_length=256, index=True)  # 用户名
     hashed_password: str  # 密码
     email: str = Field(unique=True, max_length=256)  # 邮箱

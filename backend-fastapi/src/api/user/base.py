@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlmodel import select
+import uuid
 
 from src.models.response import Message
 from src.models.request import UserRegister, UserLogin
@@ -62,6 +63,7 @@ def user_register(
 
     # 创建新的数据库用户对象
     db_user = User(
+        id=str(uuid.uuid4()),
         username=user_create.username,
         hashed_password=hashed_password,
         email=user_create.email,
